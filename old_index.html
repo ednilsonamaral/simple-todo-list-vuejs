@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>ToDo List in Vue.js</title>
+    </head>
+
+    <body>
+        <!-- elemento root do meu app -->
+        <div id="app">
+            <h1>{{ title }}</h1>
+
+            <input type="text" v-model="text" v-on:keyup.enter="addTodo()">
+
+            <ul>
+                <li v-for="item in list">
+                    <span>{{ item.text }}</span>
+                    <button v-on:click="removeTodo($index)" style="cursor: pointer;">X</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- scripts JS -->
+        <script src="https://vuejs.org/js/vue.min.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    title: 'ToDo List!',
+                    text: '',
+                    list: [{ text: 'Primeira tarefinha do dia' }]
+                },
+
+                methods: {
+                    addTodo() {
+                        this.list.push({ text: this.text })
+                        this.text = ''
+                    },
+
+                    removeTodo(index) {
+                        this.list.splice(index, 1)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
